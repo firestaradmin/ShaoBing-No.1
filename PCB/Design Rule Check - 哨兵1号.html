@@ -1,0 +1,636 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://D:\Program Files\Altium\AD19\Share\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2019/12/2</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">15:05:50</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc" class="file"><acronym title="E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc">E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">92</td></tr>
+</table>
+</td>
+</table><a name="ID2KK1ZEIXXSX3M3NAHOLVQ2GDGGDB0KRJSEKDSOM53DNMTVPUQGQM"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2E5AQB5RWG2TLPJYQ1EZPCORSHAHDUBT01MFKEW0MFBQLHOJ2XJ">Clearance Constraint (Gap=0.15mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2RMBQZ3NLVMYH4WQEIYGQNKLCFHVHVTYQTAWBMHG4QBBXKEQGNXI">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDASC54D4CXSZQE3U1NB5WMWWRKSFVUNW4FOLVNRP2P2S1ZJI3QM">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCYECWICV332GFUOUUCHOF2RTQE3Y05HZPOXBFYGDCQQC0LCMB1QC">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHMGWK5SFMDUOEKQS2HY05GNPYCIWXWR4Q4LLBMGWE3DVJ3MRJXGC">Width Constraint (Min=0.15mm) (Max=0.3mm) (Preferred=0.3mm) (InNet('GND'))</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID15FR4R0FBCKPPCWNXDWQJS33WFLAFVEJPWAFVGKZAJWV2RLFTFYD">Width Constraint (Min=0.15mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCE0ZQ3F3ULQPKO1HGYDFJB4NYLVSNPMGFWHLL5PQN1DBULHKLDYF">Width Constraint (Min=0.15mm) (Max=0.3mm) (Preferred=0.3mm) (InNet('5V'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1QLK1ULJAHU0FGYK5NFPEOACZPR1ET2VMJRSK3HNE4F1F35XAQ0G">Width Constraint (Min=0.3mm) (Max=0.3mm) (Preferred=0.3mm) (InNet('VBAT'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4ZFRAUYNMQCHO021H5LMS0JKQBVIZ0QJF31TIAFRFPSZMSV0XMYN">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2UN0CURVLIOFNVNLNMQVPEHGACTTM5LPACCBDOIIQBUBCKDWLQUF">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0TWYWIKRXSH1NAAAAP4CG4WIAJTDALF01MASI4DEF2TUZFGAZ40C">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAYI1IYGCSQSEK2Z14VQQOY2T4IDFC0ITOWAA0DGNVI0MMB30FKLH">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">16</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID32DMA0OUXUXMOMHMRASEF41YRMGF5AEDOM1EXSKE0VQM3B0JB43C">Silk To Solder Mask (Clearance=0.05mm) (IsPad),(All)</a></td>
+<td class="column2">61</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID03SLHVGBTCUDGJ3RY4KKWJMLYP24HAPSNW1LDJJGI5L4EOZCH20O">Silk to Silk (Clearance=0.05mm) (All),(All)</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZ20KOU2CUAS0G22MQUVN31ZGUBJVAVR0VH5DM0I5XQFQDQSNVFOP">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJMVHIXLEA1OVC54IICTVFG3UKXWDOER0WUG1OHSRJOKQVNCEZ2M">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">92</td>
+</tr>
+</table><br><a name="IDHMGWK5SFMDUOEKQS2HY05GNPYCIWXWR4Q4LLBMGWE3DVJ3MRJXGC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=0.15mm) (Max=0.3mm) (Preferred=0.3mm) (InNet('GND'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1463.5mil|Location2.X=1498.308mil|Location1.Y=2218.865mil|Location2.Y=2242.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1463.5mil|Location2.X=1498.308mil|Location1.Y=2218.865mil|Location2.Y=2242.5mil|Absolute=True">Width Constraint: Track (37.44mm,56.693mm)(37.49mm,56.642mm) on Top Layer Actual Width = 0.508mm, Target Width = 0.3mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID15FR4R0FBCKPPCWNXDWQJS33WFLAFVEJPWAFVGKZAJWV2RLFTFYD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=0.15mm) (Max=0.254mm) (Preferred=0.254mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.772mil|Location2.X=2948.374mil|Location1.Y=1654.153mil|Location2.Y=1680.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2906.772mil|Location2.X=2948.374mil|Location1.Y=1654.153mil|Location2.Y=1680.602mil|Absolute=True">Width Constraint: Track (74.099mm,42.421mm)(74.149mm,42.37mm) on Top Layer Actual Width = 0.508mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2UN0CURVLIOFNVNLNMQVPEHGACTTM5LPACCBDOIIQBUBCKDWLQUF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1045.32mil|Location2.X=1164.68mil|Location1.Y=3720.32mil|Location2.Y=3839.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1045.32mil|Location2.X=1164.68mil|Location1.Y=3720.32mil|Location2.Y=3839.68mil|Absolute=True">Hole Size Constraint: (3mm &gt; 2.54mm) Pad Free-2(28.067mm,96.012mm) on Multi-Layer Actual Hole Size = 3mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.32mil|Location2.X=4654.68mil|Location1.Y=3720.32mil|Location2.Y=3839.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.32mil|Location2.X=4654.68mil|Location1.Y=3720.32mil|Location2.Y=3839.68mil|Absolute=True">Hole Size Constraint: (3mm &gt; 2.54mm) Pad Free-3(116.713mm,96.012mm) on Multi-Layer Actual Hole Size = 3mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.32mil|Location2.X=4654.68mil|Location1.Y=1030.32mil|Location2.Y=1149.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4535.32mil|Location2.X=4654.68mil|Location1.Y=1030.32mil|Location2.Y=1149.68mil|Absolute=True">Hole Size Constraint: (3mm &gt; 2.54mm) Pad Free-4(116.713mm,27.686mm) on Multi-Layer Actual Hole Size = 3mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1045.32mil|Location2.X=1164.68mil|Location1.Y=1030.32mil|Location2.Y=1149.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1045.32mil|Location2.X=1164.68mil|Location1.Y=1030.32mil|Location2.Y=1149.68mil|Absolute=True">Hole Size Constraint: (3mm &gt; 2.54mm) Pad Free-5(28.067mm,27.686mm) on Multi-Layer Actual Hole Size = 3mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDAYI1IYGCSQSEK2Z14VQQOY2T4IDFC0ITOWAA0DGNVI0MMB30FKLH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1949.878mil|Location2.X=1961.128mil|Location1.Y=1371.751mil|Location2.Y=1385.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1949.878mil|Location2.X=1961.128mil|Location1.Y=1371.751mil|Location2.Y=1385.456mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.221mm &lt; 0.254mm) Between Pad ON    OFF-1(48.728mm,34.798mm) on Multi-Layer And Via (50.165mm,35.179mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.221mm] / [Bottom Solder] Mask Sliver [0.221mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2829.69mil|Location2.X=2840.94mil|Location1.Y=2519.375mil|Location2.Y=2530.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2829.69mil|Location2.X=2840.94mil|Location1.Y=2519.375mil|Location2.Y=2530.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q1-1(72.517mm,64.77mm) on Multi-Layer And Pad Q1-2(72.517mm,63.5mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2829.69mil|Location2.X=2840.94mil|Location1.Y=2469.375mil|Location2.Y=2480.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2829.69mil|Location2.X=2840.94mil|Location1.Y=2469.375mil|Location2.Y=2480.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q1-2(72.517mm,63.5mm) on Multi-Layer And Pad Q1-3(72.517mm,62.23mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1678.228mil|Location2.X=1689.478mil|Location1.Y=2741.07mil|Location2.Y=2752.32mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1678.228mil|Location2.X=1689.478mil|Location1.Y=2741.07mil|Location2.Y=2752.32mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.169mm &lt; 0.254mm) Between Pad U3-36(43.101mm,68.983mm) on Top Layer And Via (42.291mm,69.85mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.169mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1437.15mil|Location2.X=1448.4mil|Location1.Y=1159.375mil|Location2.Y=1170.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1437.15mil|Location2.X=1448.4mil|Location1.Y=1159.375mil|Location2.Y=1170.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.022mm &lt; 0.254mm) Between Pad USB-0(36.259mm,29.591mm) on Multi-Layer And Pad USB-1(36.959mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.022mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.119mil|Location2.X=1575.369mil|Location1.Y=1159.375mil|Location2.Y=1170.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1564.119mil|Location2.X=1575.369mil|Location1.Y=1159.375mil|Location2.Y=1170.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.022mm &lt; 0.254mm) Between Pad USB-0(40.259mm,29.591mm) on Multi-Layer And Pad USB-5(39.559mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.022mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.249mil|Location2.X=1473.499mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1462.249mil|Location2.X=1473.499mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad USB-1(36.959mm,30.116mm) on Top Layer And Pad USB-2(37.609mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.84mil|Location2.X=1499.09mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1487.84mil|Location2.X=1499.09mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad USB-2(37.609mm,30.116mm) on Top Layer And Pad USB-3(38.259mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1513.43mil|Location2.X=1524.68mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1513.43mil|Location2.X=1524.68mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad USB-3(38.259mm,30.116mm) on Top Layer And Pad USB-4(38.909mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1539.021mil|Location2.X=1550.271mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1539.021mil|Location2.X=1550.271mil|Location1.Y=1149.469mil|Location2.Y=1160.719mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.047mm &lt; 0.254mm) Between Pad USB-4(38.909mm,30.116mm) on Top Layer And Pad USB-5(39.559mm,30.116mm) on Top Layer [Top Solder] Mask Sliver [0.047mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1404.375mil|Location2.X=1415.625mil|Location1.Y=2669.375mil|Location2.Y=2680.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1404.375mil|Location2.X=1415.625mil|Location1.Y=2669.375mil|Location2.Y=2680.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.213mm &lt; 0.254mm) Between Via (35.306mm,67.945mm) from Top Layer to Bottom Layer And Via (36.322mm,67.945mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.213mm] / [Bottom Solder] Mask Sliver [0.213mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1949.375mil|Location2.X=1963.057mil|Location1.Y=2291.875mil|Location2.Y=2303.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1949.375mil|Location2.X=1963.057mil|Location1.Y=2291.875mil|Location2.Y=2303.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.121mm &lt; 0.254mm) Between Via (49.53mm,57.912mm) from Top Layer to Bottom Layer And Via (49.784mm,58.801mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.121mm] / [Bottom Solder] Mask Sliver [0.121mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2004.375mil|Location2.X=2015.625mil|Location1.Y=2246.875mil|Location2.Y=2258.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2004.375mil|Location2.X=2015.625mil|Location1.Y=2246.875mil|Location2.Y=2258.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.221mm &lt; 0.254mm) Between Via (50.546mm,57.15mm) from Top Layer to Bottom Layer And Via (51.562mm,57.277mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.221mm] / [Bottom Solder] Mask Sliver [0.221mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2105.978mil|Location2.X=2117.741mil|Location1.Y=2789.375mil|Location2.Y=2800.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2105.978mil|Location2.X=2117.741mil|Location1.Y=2789.375mil|Location2.Y=2800.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.16mm &lt; 0.254mm) Between Via (53.34mm,70.612mm) from Top Layer to Bottom Layer And Via (53.929mm,71.374mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.16mm] / [Bottom Solder] Mask Sliver [0.16mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.478mil|Location2.X=2140.925mil|Location1.Y=2821.875mil|Location2.Y=2833.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2128.478mil|Location2.X=2140.925mil|Location1.Y=2821.875mil|Location2.Y=2833.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.244mm &lt; 0.254mm) Between Via (53.929mm,71.374mm) from Top Layer to Bottom Layer And Via (54.483mm,72.263mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.244mm] / [Bottom Solder] Mask Sliver [0.244mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2149.375mil|Location2.X=2161.625mil|Location1.Y=2854.375mil|Location2.Y=2865.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2149.375mil|Location2.X=2161.625mil|Location1.Y=2854.375mil|Location2.Y=2865.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.113mm &lt; 0.254mm) Between Via (54.483mm,72.263mm) from Top Layer to Bottom Layer And Via (54.991mm,73.025mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.113mm] / [Bottom Solder] Mask Sliver [0.113mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID32DMA0OUXUXMOMHMRASEF41YRMGF5AEDOM1EXSKE0VQM3B0JB43C"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.05mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1382.687mil|Location2.Y=1385.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1382.687mil|Location2.Y=1385.905mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_DOWN-1(98.54mm,35.306mm) on Multi-Layer And Track (98.54mm,35.306mm)(105.04mm,35.306mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.049mil|Location2.X=3887.267mil|Location1.Y=1358.869mil|Location2.Y=1362.087mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.049mil|Location2.X=3887.267mil|Location1.Y=1358.869mil|Location2.Y=1362.087mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_DOWN-1(98.54mm,35.306mm) on Multi-Layer And Track (98.841mm,30.106mm)(98.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.988mil|Location2.X=3898.206mil|Location1.Y=1413.989mil|Location2.Y=1417.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.988mil|Location2.X=3898.206mil|Location1.Y=1413.989mil|Location2.Y=1417.208mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_DOWN-1(98.54mm,35.306mm) on Multi-Layer And Track (98.841mm,36.106mm)(104.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=1361.815mil|Location2.Y=1365.033mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=1361.815mil|Location2.Y=1365.033mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_DOWN-2(105.04mm,35.306mm) on Multi-Layer And Track (104.841mm,30.106mm)(104.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1388.844mil|Location2.Y=1391.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1388.844mil|Location2.Y=1391.156mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_DOWN-2(105.04mm,35.306mm) on Multi-Layer And Track (98.54mm,35.306mm)(105.04mm,35.306mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4116.794mil|Location2.X=4120.012mil|Location1.Y=1413.989mil|Location2.Y=1417.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4116.794mil|Location2.X=4120.012mil|Location1.Y=1413.989mil|Location2.Y=1417.208mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_DOWN-2(105.04mm,35.306mm) on Multi-Layer And Track (98.841mm,36.106mm)(104.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1205.521mil|Location2.Y=1208.74mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1205.521mil|Location2.Y=1208.74mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_DOWN-3(98.54mm,30.806mm) on Multi-Layer And Track (98.54mm,30.806mm)(105.04mm,30.806mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=1183.567mil|Location2.Y=1186.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=1183.567mil|Location2.Y=1186.786mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_DOWN-3(98.54mm,30.806mm) on Multi-Layer And Track (98.841mm,30.106mm)(104.841mm,30.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=1183.567mil|Location2.Y=1186.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=1183.567mil|Location2.Y=1186.786mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_DOWN-3(98.54mm,30.806mm) on Multi-Layer And Track (98.841mm,30.106mm)(98.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=1184.65mil|Location2.Y=1187.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=1184.65mil|Location2.Y=1187.868mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_DOWN-4(105.04mm,30.806mm) on Multi-Layer And Track (104.841mm,30.106mm)(104.841mm,36.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1211.678mil|Location2.Y=1213.991mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1211.678mil|Location2.Y=1213.991mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_DOWN-4(105.04mm,30.806mm) on Multi-Layer And Track (98.54mm,30.806mm)(105.04mm,30.806mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1189.119mil|Location2.Y=1191.432mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1189.119mil|Location2.Y=1191.432mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_DOWN-4(105.04mm,30.806mm) on Multi-Layer And Track (98.841mm,30.106mm)(104.841mm,30.106mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3422.956mil|Location2.X=3426.174mil|Location1.Y=1785.191mil|Location2.Y=1788.409mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3422.956mil|Location2.X=3426.174mil|Location1.Y=1785.191mil|Location2.Y=1788.409mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_LEFT-1(86.591mm,45.53mm) on Multi-Layer And Track (86.591mm,45.53mm)(93.091mm,45.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.596mil|Location2.X=3416.814mil|Location1.Y=1761.373mil|Location2.Y=1764.591mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.596mil|Location2.X=3416.814mil|Location1.Y=1761.373mil|Location2.Y=1764.591mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_LEFT-1(86.591mm,45.53mm) on Multi-Layer And Track (86.891mm,40.33mm)(86.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.535mil|Location2.X=3427.753mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3424.535mil|Location2.X=3427.753mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_LEFT-1(86.591mm,45.53mm) on Multi-Layer And Track (86.891mm,46.33mm)(92.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.143mil|Location2.X=3641.455mil|Location1.Y=1791.348mil|Location2.Y=1793.66mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.143mil|Location2.X=3641.455mil|Location1.Y=1791.348mil|Location2.Y=1793.66mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_LEFT-2(93.091mm,45.53mm) on Multi-Layer And Track (86.591mm,45.53mm)(93.091mm,45.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3646.341mil|Location2.X=3649.559mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3646.341mil|Location2.X=3649.559mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_LEFT-2(93.091mm,45.53mm) on Multi-Layer And Track (86.891mm,46.33mm)(92.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.98mil|Location2.X=3653.198mil|Location1.Y=1764.319mil|Location2.Y=1767.537mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.98mil|Location2.X=3653.198mil|Location1.Y=1764.319mil|Location2.Y=1767.537mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_LEFT-2(93.091mm,45.53mm) on Multi-Layer And Track (92.891mm,40.33mm)(92.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3422.956mil|Location2.X=3426.174mil|Location1.Y=1608.025mil|Location2.Y=1611.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3422.956mil|Location2.X=3426.174mil|Location1.Y=1608.025mil|Location2.Y=1611.244mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_LEFT-3(86.591mm,41.03mm) on Multi-Layer And Track (86.591mm,41.03mm)(93.091mm,41.03mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.58mil|Location2.X=3416.799mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.58mil|Location2.X=3416.799mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_LEFT-3(86.591mm,41.03mm) on Multi-Layer And Track (86.891mm,40.33mm)(86.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.58mil|Location2.X=3416.799mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3413.58mil|Location2.X=3416.799mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_LEFT-3(86.591mm,41.03mm) on Multi-Layer And Track (86.891mm,40.33mm)(92.891mm,40.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.143mil|Location2.X=3641.455mil|Location1.Y=1614.182mil|Location2.Y=1616.495mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3639.143mil|Location2.X=3641.455mil|Location1.Y=1614.182mil|Location2.Y=1616.495mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_LEFT-4(93.091mm,41.03mm) on Multi-Layer And Track (86.591mm,41.03mm)(93.091mm,41.03mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3648.317mil|Location2.X=3650.629mil|Location1.Y=1591.623mil|Location2.Y=1593.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3648.317mil|Location2.X=3650.629mil|Location1.Y=1591.623mil|Location2.Y=1593.936mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_LEFT-4(93.091mm,41.03mm) on Multi-Layer And Track (86.891mm,40.33mm)(92.891mm,40.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.98mil|Location2.X=3653.198mil|Location1.Y=1587.154mil|Location2.Y=1590.372mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.98mil|Location2.X=3653.198mil|Location1.Y=1587.154mil|Location2.Y=1590.372mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_LEFT-4(93.091mm,41.03mm) on Multi-Layer And Track (92.891mm,40.33mm)(92.891mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.861mil|Location2.X=4367.08mil|Location1.Y=1785.191mil|Location2.Y=1788.409mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.861mil|Location2.X=4367.08mil|Location1.Y=1785.191mil|Location2.Y=1788.409mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RIGHT-1(110.49mm,45.53mm) on Multi-Layer And Track (110.49mm,45.53mm)(116.99mm,45.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.501mil|Location2.X=4357.72mil|Location1.Y=1761.373mil|Location2.Y=1764.591mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.501mil|Location2.X=4357.72mil|Location1.Y=1761.373mil|Location2.Y=1764.591mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RIGHT-1(110.49mm,45.53mm) on Multi-Layer And Track (110.79mm,40.33mm)(110.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4365.44mil|Location2.X=4368.659mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4365.44mil|Location2.X=4368.659mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_RIGHT-1(110.49mm,45.53mm) on Multi-Layer And Track (110.79mm,46.33mm)(116.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4580.048mil|Location2.X=4582.361mil|Location1.Y=1791.348mil|Location2.Y=1793.66mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4580.048mil|Location2.X=4582.361mil|Location1.Y=1791.348mil|Location2.Y=1793.66mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RIGHT-2(116.99mm,45.53mm) on Multi-Layer And Track (110.49mm,45.53mm)(116.99mm,45.53mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587.247mil|Location2.X=4590.465mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4587.247mil|Location2.X=4590.465mil|Location1.Y=1816.493mil|Location2.Y=1819.712mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_RIGHT-2(116.99mm,45.53mm) on Multi-Layer And Track (110.79mm,46.33mm)(116.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.885mil|Location2.X=4594.104mil|Location1.Y=1764.319mil|Location2.Y=1767.537mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.885mil|Location2.X=4594.104mil|Location1.Y=1764.319mil|Location2.Y=1767.537mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_RIGHT-2(116.99mm,45.53mm) on Multi-Layer And Track (116.79mm,40.33mm)(116.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.861mil|Location2.X=4367.08mil|Location1.Y=1608.025mil|Location2.Y=1611.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.861mil|Location2.X=4367.08mil|Location1.Y=1608.025mil|Location2.Y=1611.244mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RIGHT-3(110.49mm,41.03mm) on Multi-Layer And Track (110.49mm,41.03mm)(116.99mm,41.03mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.486mil|Location2.X=4357.704mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.486mil|Location2.X=4357.704mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RIGHT-3(110.49mm,41.03mm) on Multi-Layer And Track (110.79mm,40.33mm)(110.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.486mil|Location2.X=4357.704mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4354.486mil|Location2.X=4357.704mil|Location1.Y=1586.071mil|Location2.Y=1589.29mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RIGHT-3(110.49mm,41.03mm) on Multi-Layer And Track (110.79mm,40.33mm)(116.79mm,40.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4580.048mil|Location2.X=4582.361mil|Location1.Y=1614.182mil|Location2.Y=1616.495mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4580.048mil|Location2.X=4582.361mil|Location1.Y=1614.182mil|Location2.Y=1616.495mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RIGHT-4(116.99mm,41.03mm) on Multi-Layer And Track (110.49mm,41.03mm)(116.99mm,41.03mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4589.222mil|Location2.X=4591.534mil|Location1.Y=1591.623mil|Location2.Y=1593.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4589.222mil|Location2.X=4591.534mil|Location1.Y=1591.623mil|Location2.Y=1593.936mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RIGHT-4(116.99mm,41.03mm) on Multi-Layer And Track (110.79mm,40.33mm)(116.79mm,40.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.885mil|Location2.X=4594.104mil|Location1.Y=1587.154mil|Location2.Y=1590.372mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590.885mil|Location2.X=4594.104mil|Location1.Y=1587.154mil|Location2.Y=1590.372mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_RIGHT-4(116.99mm,41.03mm) on Multi-Layer And Track (116.79mm,40.33mm)(116.79mm,46.33mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1590.993mil|Location2.Y=1593.305mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1590.993mil|Location2.Y=1593.305mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RST-1(105.04mm,41.093mm) on Multi-Layer And Track (104.74mm,40.293mm)(104.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1616.678mil|Location2.Y=1618.991mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1616.678mil|Location2.Y=1618.991mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RST-1(105.04mm,41.093mm) on Multi-Layer And Track (98.54mm,41.093mm)(105.04mm,41.093mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.316mil|Location2.X=4121.535mil|Location1.Y=1590.135mil|Location2.Y=1593.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.316mil|Location2.X=4121.535mil|Location1.Y=1590.135mil|Location2.Y=1593.353mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.021mm &lt; 0.05mm) Between Pad KEY_RST-1(105.04mm,41.093mm) on Multi-Layer And Track (98.74mm,40.293mm)(104.74mm,40.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.021mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1610.521mil|Location2.Y=1613.74mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1610.521mil|Location2.Y=1613.74mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RST-2(98.54mm,41.093mm) on Multi-Layer And Track (98.54mm,41.093mm)(105.04mm,41.093mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.358mil|Location2.X=3883.576mil|Location1.Y=1586.112mil|Location2.Y=1589.331mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.358mil|Location2.X=3883.576mil|Location1.Y=1586.112mil|Location2.Y=1589.331mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.032mm &lt; 0.05mm) Between Pad KEY_RST-2(98.54mm,41.093mm) on Multi-Layer And Track (98.74mm,40.293mm)(104.74mm,40.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.032mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.281mil|Location2.X=3883.499mil|Location1.Y=1586.266mil|Location2.Y=1589.485mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.281mil|Location2.X=3883.499mil|Location1.Y=1586.266mil|Location2.Y=1589.485mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_RST-2(98.54mm,41.093mm) on Multi-Layer And Track (98.74mm,40.293mm)(98.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1768.159mil|Location2.Y=1770.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=1768.159mil|Location2.Y=1770.471mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RST-3(105.04mm,45.593mm) on Multi-Layer And Track (104.74mm,40.293mm)(104.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1793.844mil|Location2.Y=1796.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=1793.844mil|Location2.Y=1796.156mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RST-3(105.04mm,45.593mm) on Multi-Layer And Track (98.54mm,45.593mm)(105.04mm,45.593mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4112.621mil|Location2.X=4115.839mil|Location1.Y=1815.282mil|Location2.Y=1818.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4112.621mil|Location2.X=4115.839mil|Location1.Y=1815.282mil|Location2.Y=1818.5mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.034mm &lt; 0.05mm) Between Pad KEY_RST-3(105.04mm,45.593mm) on Multi-Layer And Track (98.74mm,46.293mm)(104.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.034mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1787.687mil|Location2.Y=1790.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=1787.687mil|Location2.Y=1790.905mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_RST-4(98.54mm,45.593mm) on Multi-Layer And Track (98.54mm,45.593mm)(105.04mm,45.593mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.281mil|Location2.X=3883.499mil|Location1.Y=1763.432mil|Location2.Y=1766.65mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3880.281mil|Location2.X=3883.499mil|Location1.Y=1763.432mil|Location2.Y=1766.65mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_RST-4(98.54mm,45.593mm) on Multi-Layer And Track (98.74mm,40.293mm)(98.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3895.441mil|Location2.X=3897.753mil|Location1.Y=1818.545mil|Location2.Y=1820.857mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3895.441mil|Location2.X=3897.753mil|Location1.Y=1818.545mil|Location2.Y=1820.857mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_RST-4(98.54mm,45.593mm) on Multi-Layer And Track (98.74mm,46.293mm)(104.74mm,46.293mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=2239.852mil|Location2.Y=2243.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=2239.852mil|Location2.Y=2243.07mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_UP-1(98.54mm,57.078mm) on Multi-Layer And Track (98.54mm,57.078mm)(105.04mm,57.078mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.049mil|Location2.X=3887.267mil|Location1.Y=2216.034mil|Location2.Y=2219.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.049mil|Location2.X=3887.267mil|Location1.Y=2216.034mil|Location2.Y=2219.253mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_UP-1(98.54mm,57.078mm) on Multi-Layer And Track (98.841mm,51.878mm)(98.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.988mil|Location2.X=3898.206mil|Location1.Y=2271.155mil|Location2.Y=2274.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.988mil|Location2.X=3898.206mil|Location1.Y=2271.155mil|Location2.Y=2274.373mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_UP-1(98.54mm,57.078mm) on Multi-Layer And Track (98.841mm,57.878mm)(104.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=2218.98mil|Location2.Y=2222.199mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=2218.98mil|Location2.Y=2222.199mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_UP-2(105.04mm,57.078mm) on Multi-Layer And Track (104.841mm,51.878mm)(104.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=2246.009mil|Location2.Y=2248.322mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=2246.009mil|Location2.Y=2248.322mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_UP-2(105.04mm,57.078mm) on Multi-Layer And Track (98.54mm,57.078mm)(105.04mm,57.078mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4116.794mil|Location2.X=4120.012mil|Location1.Y=2271.155mil|Location2.Y=2274.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4116.794mil|Location2.X=4120.012mil|Location1.Y=2271.155mil|Location2.Y=2274.373mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.046mm &lt; 0.05mm) Between Pad KEY_UP-2(105.04mm,57.078mm) on Multi-Layer And Track (98.841mm,57.878mm)(104.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=2062.687mil|Location2.Y=2065.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3893.409mil|Location2.X=3896.627mil|Location1.Y=2062.687mil|Location2.Y=2065.905mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_UP-3(98.54mm,52.578mm) on Multi-Layer And Track (98.54mm,52.578mm)(105.04mm,52.578mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=2040.733mil|Location2.Y=2043.951mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=2040.733mil|Location2.Y=2043.951mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_UP-3(98.54mm,52.578mm) on Multi-Layer And Track (98.841mm,51.878mm)(104.841mm,51.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=2040.733mil|Location2.Y=2043.951mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3884.033mil|Location2.X=3887.251mil|Location1.Y=2040.733mil|Location2.Y=2043.951mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.036mm &lt; 0.05mm) Between Pad KEY_UP-3(98.54mm,52.578mm) on Multi-Layer And Track (98.841mm,51.878mm)(98.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.036mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=2041.815mil|Location2.Y=2045.033mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4120.432mil|Location2.X=4123.651mil|Location1.Y=2041.815mil|Location2.Y=2045.033mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.027mm &lt; 0.05mm) Between Pad KEY_UP-4(105.04mm,52.578mm) on Multi-Layer And Track (104.841mm,51.878mm)(104.841mm,57.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=2068.844mil|Location2.Y=2071.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4109.596mil|Location2.X=4111.908mil|Location1.Y=2068.844mil|Location2.Y=2071.156mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_UP-4(105.04mm,52.578mm) on Multi-Layer And Track (98.54mm,52.578mm)(105.04mm,52.578mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=2046.285mil|Location2.Y=2048.597mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.769mil|Location2.X=4121.082mil|Location1.Y=2046.285mil|Location2.Y=2048.597mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad KEY_UP-4(105.04mm,52.578mm) on Multi-Layer And Track (98.841mm,51.878mm)(104.841mm,51.878mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.214mil|Location2.X=3560.526mil|Location1.Y=2009.631mil|Location2.Y=2011.943mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3558.214mil|Location2.X=3560.526mil|Location1.Y=2009.631mil|Location2.Y=2011.943mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.05mm) Between Pad RST-2(89.408mm,51.647mm) on Top Layer And Track (88.108mm,50.947mm)(90.708mm,50.947mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID03SLHVGBTCUDGJ3RY4KKWJMLYP24HAPSNW1LDJJGI5L4EOZCH20O"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.05mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2761.981mil|Location2.X=2764.293mil|Location1.Y=2488.844mil|Location2.Y=2491.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2761.981mil|Location2.X=2764.293mil|Location1.Y=2488.844mil|Location2.Y=2491.156mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Arc (72.517mm,63.5mm) on Top Overlay And Text "Q1" (69.342mm,63.246mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1168.873mil|Location2.X=1171.185mil|Location1.Y=2568.95mil|Location2.Y=2571.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1168.873mil|Location2.X=1171.185mil|Location1.Y=2568.95mil|Location2.Y=2571.262mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Text "C12" (29.769mm,64.592mm) on Top Overlay And Track (29.667mm,65.303mm)(29.667mm,67.285mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1190.073mil|Location2.X=1192.385mil|Location1.Y=2569.844mil|Location2.Y=2572.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1190.073mil|Location2.X=1192.385mil|Location1.Y=2569.844mil|Location2.Y=2572.156mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Text "C12" (29.769mm,64.592mm) on Top Overlay And Track (29.667mm,65.303mm)(30.658mm,65.303mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1186.587mil|Location2.X=1188.899mil|Location1.Y=2714.555mil|Location2.Y=2716.867mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1186.587mil|Location2.X=1188.899mil|Location1.Y=2714.555mil|Location2.Y=2716.867mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Text "C16" (29.769mm,68.097mm) on Top Overlay And Track (29.693mm,69.088mm)(30.836mm,69.088mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1249.559mil|Location2.X=1251.871mil|Location1.Y=2714.555mil|Location2.Y=2716.867mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1249.559mil|Location2.X=1251.871mil|Location1.Y=2714.555mil|Location2.Y=2716.867mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Text "C16" (29.769mm,68.097mm) on Top Overlay And Track (31.598mm,69.088mm)(32.868mm,69.088mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1388.922mil|Location2.X=1392.141mil|Location1.Y=3203.391mil|Location2.Y=3206.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1388.922mil|Location2.X=1392.141mil|Location1.Y=3203.391mil|Location2.Y=3206.609mil|Absolute=True">Silk To Silk Clearance Constraint: (0.027mm &lt; 0.05mm) Between Text "Download" (35.433mm,81.407mm) on Top Overlay And Track (35.179mm,80.645mm)(35.179mm,88.265mm) on Top Overlay Silk Text to Silk Clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3190.97mil|Location2.X=3193.282mil|Location1.Y=3766.088mil|Location2.Y=3768.4mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3190.97mil|Location2.X=3193.282mil|Location1.Y=3766.088mil|Location2.Y=3768.4mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.05mm) Between Text "OLED" (81.28mm,95.885mm) on Top Overlay And Track (68.566mm,95.561mm)(97.866mm,95.561mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3088.391mil|Location2.X=3091.609mil|Location1.Y=3653.917mil|Location2.Y=3657.136mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3088.391mil|Location2.X=3091.609mil|Location1.Y=3653.917mil|Location2.Y=3657.136mil|Absolute=True">Silk To Silk Clearance Constraint: (0.027mm &lt; 0.05mm) Between Text "VCC GND SCL SDA" (77.329mm,91.937mm) on Top Overlay And Track (78.486mm,92.964mm)(78.486mm,95.504mm) on Top Overlay Silk Text to Silk Clearance [0.027mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\%E8%AE%A1%E9%87%8F\%E8%AF%BE%E7%A8%8B%E4%BA%86%E5%95%A6\%E5%A4%A7%E4%B8%89%E4%B8%8A\%E6%95%B0%E5%AD%97%E6%B8%A9%E5%BA%A6%E8%AE%A1%E8%AF%BE%E8%AE%BE-%E5%93%A8%E5%85%B51%E5%8F%B7\PCB\%E5%93%A8%E5%85%B51%E5%8F%B7.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3090.068mil|Location2.X=3093.287mil|Location1.Y=3653.917mil|Location2.Y=3657.136mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\MarsCloud\Doc\Beautiful\计量\课程了啦\大三上\数字温度计课设-哨兵1号\PCB\哨兵1号.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3090.068mil|Location2.X=3093.287mil|Location1.Y=3653.917mil|Location2.Y=3657.136mil|Absolute=True">Silk To Silk Clearance Constraint: (0.027mm &lt; 0.05mm) Between Text "VCC GND SCL SDA" (77.329mm,91.937mm) on Top Overlay And Track (78.486mm,92.964mm)(88.646mm,92.964mm) on Top Overlay Silk Text to Silk Clearance [0.027mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

@@ -1,0 +1,19 @@
+.\objects\ds18b20.o: ..\Drive\DS18B20.c
+.\objects\ds18b20.o: ..\Drive\DS18B20.h
+.\objects\ds18b20.o: ..\Lib\CMSIS\stm32f10x.h
+.\objects\ds18b20.o: ..\Lib\CMSIS\core_cm3.h
+.\objects\ds18b20.o: D:\Program Files (x86)\keilv5STM32\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\ds18b20.o: ..\Lib\CMSIS\system_stm32f10x.h
+.\objects\ds18b20.o: ..\User\stm32f10x_conf.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_adc.h
+.\objects\ds18b20.o: ..\Lib\CMSIS\stm32f10x.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_dma.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_exti.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_flash.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_gpio.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_i2c.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_rcc.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_tim.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\stm32f10x_usart.h
+.\objects\ds18b20.o: ..\Lib\FWLib\inc\misc.h
+.\objects\ds18b20.o: ..\User\delay.h

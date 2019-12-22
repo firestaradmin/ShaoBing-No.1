@@ -1,0 +1,97 @@
+
+stm32 72M 硬件IIC 400KHz 直接刷新模式 无Buffer（一个命令 接一个数据  很慢）
+填充整屏时间  OLED_Fill(...);
+	0.0776 s
+	0.0777 s
+	0.0776 s
+	
+==============================================================
+stm32 72M 硬件IIC 400KHz Buffer刷新模式 （一个命令 接一个数据  很慢）
+填充整屏时间  OLED_Fill(...);	
+	buffer[][] 更改  0.01764s
+	Refresh gram   0.07781s
+	
+	
+void I2C_WriteByte(uint8_t addr,uint8_t data)
+{
+  while(I2C_GetFlagStatus(OLED_HardWare_IIC, I2C_FLAG_BUSY));
+	
+	I2C_GenerateSTART(OLED_HardWare_IIC, ENABLE);//开启I2C1
+	while(!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_MODE_SELECT));/*EV5,主模式*/
+
+	I2C_Send7bitAddress(OLED_HardWare_IIC, OLED_ADDRESS, I2C_Direction_Transmitter);//器件地址 -- 默认0x78
+	while(!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+
+	I2C_SendData(OLED_HardWare_IIC, addr);//寄存器地址
+	while (!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+
+	I2C_SendData(OLED_HardWare_IIC, data);//发送数据
+	while (!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+	
+	I2C_GenerateSTOP(OLED_HardWare_IIC, ENABLE);//关闭I2C1总线
+}
+
+void OLED_Refresh_Gram(void)
+{
+	u8 i,n;     
+	for(i=0;i<8;i++)  
+	{  
+		OLED_WR_Byte (0xb0+i,OLED_CMD);    //设置页地址（0~7）
+		OLED_WR_Byte (0x00,OLED_CMD);      //设置显示位置—列低地址
+		OLED_WR_Byte (0x10,OLED_CMD);      //设置显示位置—列高地址   
+		for(n=0;n<128;n++)OLED_WR_Byte(OLED_GRAM[n][i],OLED_DATA); 
+	}   
+}
+
+
+=====================================================
+stm32 72M 硬件IIC 400KHz Buffer刷新模式（一个命令 接多个数据  很快）
+	buffer[][] 更改  0.01764s	
+	Refresh gram  0.02312s
+
+void OLED_Refresh_OneTime(void)
+{
+	u8 i = 0 ,j =0;
+	while(I2C_GetFlagStatus(OLED_HardWare_IIC, I2C_FLAG_BUSY));
+	
+	I2C_GenerateSTART(OLED_HardWare_IIC, ENABLE);//开启I2C1
+	while(!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_MODE_SELECT));/*EV5,主模式*/
+
+	I2C_Send7bitAddress(OLED_HardWare_IIC, OLED_ADDRESS, I2C_Direction_Transmitter);//器件地址 -- 默认0x78
+	while(!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+
+	I2C_SendData(OLED_HardWare_IIC, OLED_DATA);//寄存器地址
+	while (!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+
+	for(i = 0; i < 8;  i++)
+	{
+		for(j = 0;j<128;j++)
+		{
+			I2C_SendData(OLED_HardWare_IIC, OLED_GRAM[j][i]);//发送数据
+			while (!I2C_CheckEvent(OLED_HardWare_IIC, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+		}
+		
+	}
+	
+	I2C_GenerateSTOP(OLED_HardWare_IIC, ENABLE);//关闭I2C1总线
+}
+
+==============================================
+
+stm32 72M 硬件IIC DMA 传输  Buffer刷新模式（一个命令 接多个数据  很快）  
+	OLED_Clear()	0.00024s
+	OLED_Fill(0,0,127,63,1) 0.009587s
+	Refresh gram  0.02632s
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	

@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+".\objects\core_cm3.o"
+".\objects\system_stm32f10x.o"
+".\objects\startup_stm32f10x_md.o"
+".\objects\stm32f10x_dma.o"
+".\objects\stm32f10x_exti.o"
+".\objects\stm32f10x_gpio.o"
+".\objects\stm32f10x_i2c.o"
+".\objects\stm32f10x_rcc.o"
+".\objects\stm32f10x_tim.o"
+".\objects\stm32f10x_usart.o"
+".\objects\misc.o"
+".\objects\delay.o"
+".\objects\main.o"
+".\objects\mykey.o"
+".\objects\myshaobingapp.o"
+".\objects\myusart.o"
+".\objects\at24c04.o"
+".\objects\ds18b20.o"
+".\objects\oled_i2c_buffer.o"
+--strict --scatter ".\Objects\ShaoBing_No_1.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\ShaoBing_No_1.map" -o .\Objects\ShaoBing_No_1.axf

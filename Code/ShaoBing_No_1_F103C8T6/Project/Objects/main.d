@@ -1,0 +1,25 @@
+.\objects\main.o: ..\User\main.c
+.\objects\main.o: ..\Lib\CMSIS\stm32f10x.h
+.\objects\main.o: ..\Lib\CMSIS\core_cm3.h
+.\objects\main.o: D:\Program Files (x86)\keilv5STM32\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: ..\Lib\CMSIS\system_stm32f10x.h
+.\objects\main.o: ..\User\stm32f10x_conf.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_adc.h
+.\objects\main.o: ..\Lib\CMSIS\stm32f10x.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_dma.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_exti.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_flash.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_gpio.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_i2c.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_rcc.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_tim.h
+.\objects\main.o: ..\Lib\FWLib\inc\stm32f10x_usart.h
+.\objects\main.o: ..\Lib\FWLib\inc\misc.h
+.\objects\main.o: ..\User\stm32f10x_it.h
+.\objects\main.o: ..\Drive\OLED_I2C_Buffer.h
+.\objects\main.o: ..\User\delay.h
+.\objects\main.o: ..\Drive\DS18B20.h
+.\objects\main.o: ..\User\myUSART.h
+.\objects\main.o: ..\User\myShaoBingApp.h
+.\objects\main.o: ..\User\myKey.h
+.\objects\main.o: ..\User\AT24C04.h
