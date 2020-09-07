@@ -18,6 +18,7 @@ Needs:
 4.	ESP8266-01S WIFI模块*1
 5.	LED
 6.	蜂鸣器
+7.AT24C04 
 
 
 

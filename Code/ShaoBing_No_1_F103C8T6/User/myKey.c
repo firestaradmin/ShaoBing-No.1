@@ -48,15 +48,17 @@
 #define KEY_DOWN_EXTI_LINE 		EXTI_Line14
 #define KEY_LEFT_EXTI_LINE 		EXTI_Line13
 #define KEY_RIGHT_EXTI_LINE 	EXTI_Line12
-
+//5ms计数器
 unsigned short delay_Time5ms = 0;
-
+//按键被按下标志
 unsigned char myKey_IsPressed_Flag = 0;
+//按键扫描延时周期
 unsigned char myKey_GetKeyValue_delayTime5ms;
+
 unsigned char delay_EXTI0_delayTime5ms;
+
 unsigned char delay_EXTI15_10_delayTime5ms;
 
-//u8 testNum = 0;
 
 myKey_ValueTypedef key_RST_Value;
 myKey_ValueTypedef key_UP_Value;
